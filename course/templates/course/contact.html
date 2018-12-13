@@ -1,0 +1,108 @@
+{% comment %}
+{% endcomment %}
+<div>
+	<p>-----1-----</p>
+</div>
+<form action="{% url 'course:get_contact' %}" method="post">
+	{% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit" / >
+</form>
+<div>
+	<p>-----2-----</p>
+</div>
+<div>
+	<p>
+		<label for="id_subject">Subject: </label>
+		<input id="id_subject" type="text" name="subject" maxlength="100" required / >
+	</p>
+	<p>
+		<label for="id_message">Message: </label>
+		<textarea id="id_message" name="message"></textarea>
+	</p>
+	<p>
+		<label for="id_sender">Sender: </label>
+		<input id="id_sender" type="email" name="sender" required / >
+	</p>
+	<p>
+		<label for="id_cc_myself">Cc_myself: </label>
+		<input id="id_cc_myself" type="checkbox" name="cc_myself" required / >
+	</p>
+	<p>
+		<input type="submit" value="Submit" / >
+	</p>
+</div>
+<div>
+	<p>-----3-----</p>
+</div>
+<div>
+{{ form.non_field_errors }}
+	<div class="fieldWrapper">
+		{{ form.subject.errors}}
+		<label for="{{ form.subject.id_for_label }}">Subject: </label>
+		{{ form.subject }}
+	</div>
+	<div class="fieldWrapper">
+		{{ form.message.errors }}
+		<label for="{{ form.message.id_for_label }}">Message: </label>
+		{{ form.message }}
+	</div>
+	<div class="fieldWrapper">
+		{{ form.sender.errors }}
+		<label for="{{ form.sender.if_for_label }}">Sender: </label>
+		{{ form.sender }}
+	</div>
+	<div class="fieldWrapper">
+		{{ form.cc_myself.errors }}
+		<label for="{{ form.cc_myself.id_for_label }}">Cc_myself: </label>
+		{{ form.cc_myself }}
+	</div>
+</div>
+<div>
+	<p>-----4-----</p>
+</div>
+<div>
+	{{ form.non_field_errors }}
+	<div class="fieldWrapper">
+		{% if form.subject.errors %}
+			<ol>
+				{% for error in form.subject.errors %}
+					<li><strong>{{ error|escape }}</strong></li>
+				{% endfor %}
+			</ol>
+		{% endif %}
+		{{ form.subject.label_tag }}
+		{{ form.subject }}
+	</div>
+	<div class="fieldWrapper">
+		{{ form.message.errors }}
+		{{ form.message.label_tag }}
+		{{ form.message }}
+	</div>
+	<div class="fieldWrapper">
+		{{ form.sender.errors }}
+		{{ form.sender.label_tag }}
+		{{ form.sender }}
+	</div>
+	<div class="fieldWrapper">
+		{{ form.cc_myself.errors }}
+		{{ form.cc_myself.label_tag }}
+		{{ form.cc_myself }}
+	</div>
+</div>
+<div>
+	<p>-----5-----</p>
+</div>
+{% for field in form %}
+	<div class="fieldWrapper">
+		{{ field.errors }}
+		{{ field.label_tag }}	{{ field }}
+		{% if field.help_text %}
+			<p class="htlp"> {{ field.help_text|safe }}</p>
+		{% endif %}
+	<div>
+{% endfor %}
+<div>
+	<p>-----6-----</p>
+	{% include "course/forms_template.html" with form1=form %}
+</div>

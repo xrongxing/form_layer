@@ -1,0 +1,12 @@
+<tr><th><label for="id_subject">Subject:</label></th><td><input id="id_subject" type="text" name="subject" maxlength="100" required /></td></tr>
+<tr><th><label for="id_message">Message:</label></th><td><input type="text" name="message" id="id_message" required /></td></tr>
+<tr><th><label for="id_sender">Sender:</label></th><td><input type="email" name="sender" id="id_sender" required /></td></tr>
+<tr><th><label for="id_cc_myself">Cc myself:</label></th><td><input type="checkbox" name="cc_myself" id="id_cc_myself" /></td></tr>
+1111
+
+
+<form action="/your-name/" method="post">
+	<label for="your_name">Your name: </label>
+	<input id="your_name" type="text" name="your_name" value="{{ data }}">
+	<input type="submit" value="Ok">
+</form>
