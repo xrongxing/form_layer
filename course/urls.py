@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^yourname/$', course_views.yourname, name = 'yourname'),
     url(r'^thanks/$', course_views.thanks, name = 'thanks'),
     url(r'^getcontact/$', course_views.get_contact, name = 'get_contact'),
+    url(r'^getauthor/$', course_views.get_author, name = 'get_author'),
 ]

@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from .forms import NameForm, ContactForm
 from django.core.mail import send_mail
+from .models import AuthorForm
 
 # Create your views here.
 
@@ -54,7 +55,13 @@ def get_contact(request):
             send_mail(subject, message, sender, recipients)
             return HttpResponseRedirect('/course/thanks/')
     else:
-        form = ContactForm()
+	data = {
+            'subject': 'hello',
+            'message': '111213213',
+            'sender': 'lll@sss',
+            'cc_myself': True,
+        }
+        form = ContactForm(data)
         context = {
             'form': form,
         }
@@ -62,6 +69,22 @@ def get_contact(request):
     #    'form': form,
     #}
     return render(request, 'course/contact.html', context)
+
+def get_author(request):
+    if request.method == 'POST':
+        form = AuthorForm(instance=request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            title = form.cleaned_data['title']
+            brith_date = form.cleaned_data['brith_date']
+        return HttpResponseRediret('/course/thanks/')
+         
+    else:
+        form = AuthorForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'course/author.html', context)
 
 def yourname(request):
     context = {
